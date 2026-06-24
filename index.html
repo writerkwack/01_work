@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>곽랑주 | Creative Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        },
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        emailjs.init("pwhn4ewFwYgyhkFvD"); 
+    </script>
+
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-darkBg dark:text-slate-100 min-h-screen flex flex-col antialiased">
+
+<!-- 네비게이션 바 -->
+<header class="fixed top-0 w-full z-40 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0">
+                <a href="#" class="text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-indigo-500">
+                    Rang-JU K.
+                </a>
+            </div>
+            <!-- 데스크탑 메뉴 -->
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-slate-600 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-500 font-medium transition-colors">소개</a>
+                <a href="#experience" class="text-slate-600 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-500 font-medium transition-colors">경력</a>
+                <a href="#portfolio" class="text-slate-600 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-500 font-medium transition-colors">포트폴리오</a>
+                <a href="#contact" class="text-slate-600 hover:text-primary-500 dark:text-slate-300 dark:hover:text-primary-500 font-medium transition-colors">연락처</a>
+                
+                <!-- 다크모드 토글 버튼 -->
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 focus:outline-none" aria-label="테마 전환">
+                    <i id="theme-icon" class="fas fa-moon text-lg"></i>
+                </button>
+            </nav>
+            
+            <!-- 모바일 토글 버튼 -->
+            <div class="flex md:hidden items-center gap-4">
+                <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    <i id="mobile-theme-icon" class="fas fa-moon text-lg"></i>
+                </button>
+                <button id="mobile-menu-btn" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 모바일 메뉴 드롭다운 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-darkBg border-b border-slate-200 dark:border-slate-800">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">소개</a>
+            <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">경력</a>
+            <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">포트폴리오</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">연락처</a>
+        </div>
+    </div>
+</header>
+
+<main class="flex-grow pt-16">
+    <!-- 히어로 섹션 -->
+    <section class="relative overflow-hidden py-24 sm:py-32 flex items-center justify-center min-h-[85vh]">
+        <div class="absolute top-1/4 left-1/10 w-72 h-72 bg-primary-500/10 dark:bg-primary-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-1/4 right-1/10 w-96 h-96 bg-indigo-500/10 dark:bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <span class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-primary-100 text-primary-600 dark:bg-primary-500/10 dark:text-primary-400">
+                        <span class="w-1.5 h-1.5 bg-primary-500 rounded-full animate-ping"></span>
+                        프리랜서 및 협업 제안 환영
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+                        안녕하세요, 크리에이터 <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 via-sky-500 to-indigo-500">
+                        곽랑주
+                        </span> 입니다.
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0">
+                        생성형 AI가 가진 가치를 경험으로 바꿉니다. AI 그래픽, 영상, 프리젠테이션까지 '강연과 코칭'으로 여러분의 '진화'와 함께합니다.
+                    </p>
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                        <a href="#portfolio" class="px-6 py-3 rounded-lg font-semibold bg-primary-500 hover:bg-primary-600 text-white shadow-lg shadow-primary-500/20 dark:shadow-none hover:shadow-xl transition-all">
+                            포트폴리오 보기
+                        </a>
+                        <a href="#contact" class="px-6 py-3 rounded-lg font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                            문의하기
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-primary-500 to-indigo-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                        <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden bg-slate-200 dark:bg-slate-800 border-4 border-white dark:border-darkCard">
+                            <img src="https://placehold.co/500x500/0ea5e9/ffffff?text=Creator+KRJ" alt="프로필 이미지" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/500x500/0ea5e9/ffffff?text=SEO+YUL'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 소개 섹션 -->
+    <section id="about" class="py-20 bg-white dark:bg-darkCard/30 border-y border-slate-100 dark:border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-slate-900 dark:text-white">ABOUT ME</h2>
+                <div class="h-1 w-12 bg-primary-500 mx-auto mt-4 rounded-full"></div>
+                <p class="mt-4 text-slate-600 dark:text-slate-400 text-lg">기획과 강연으로 당신이 원하는 최고의 결과물을 만들어냅니다.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">가치를 전달하는 시각화 전문가</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
+                        사람의 마음을 움직이는 콘텐츠 and 강의는 아름다움뿐 아니라, 견고한 메시지와 스토리텔링이 필수적이어야 한다고 믿습니다. 청중에 맞춘 이미지와 디자인, 그리고 비디오는 고객의 만족을 이끌어 냅니다.
+                    </p>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
+                        고객사 및 담당자와 긴밀한 소통과 체계적인 강연 기획력을 바탕으로, 청중이 원하는 고품격 시각화 자료를 작성합니다.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <div class="p-4 bg-slate-50 dark:bg-darkCard rounded-xl border border-slate-100 dark:border-slate-800">
+                            <p class="text-sm text-slate-500 dark:text-slate-400">이메일</p>
+                            <p class="text-base font-semibold text-slate-900 dark:text-white mt-1">writerkwack@naver.com</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 dark:bg-darkCard rounded-xl border border-slate-100 dark:border-slate-800">
+                            <p class="text-sm text-slate-500 dark:text-slate-400">활동 영역</p>
+                            <p class="text-base font-semibold text-slate-900 dark:text-white mt-1">전국 / 원격 협업 가능</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-6 bg-slate-50 dark:bg-darkCard p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-white">SKILLS</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium text-slate-700 dark:text-slate-300">스토리텔링 및 강연</span>
+                                <span class="text-primary-500 font-semibold">95%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-primary-500 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium text-slate-700 dark:text-slate-300">강의 기획 및 관리</span>
+                                <span class="text-primary-500 font-semibold">90%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-primary-500 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium text-slate-700 dark:text-slate-300">이미지 생성 AI 활용</span>
+                                <span class="text-primary-500 font-semibold">95%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-primary-500 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-medium text-slate-700 dark:text-slate-300">Canva, CapCut, PPT (Design)</span>
+                                <span class="text-primary-500 font-semibold">85%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-primary-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 경력 및 이력 섹션 -->
+    <section id="experience" class="py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-slate-900 dark:text-white">EXPERIENCE</h2>
+                <div class="h-1 w-12 bg-primary-500 mx-auto mt-4 rounded-full"></div>
+                <p class="mt-4 text-slate-600 dark:text-slate-400 text-lg">다양한 기업, 공공기관, 그리고 교육기관의 성장과 함께 했습니다.</p>
+            </div>
+            
+            <div class="relative border-l border-slate-200 dark:border-slate-800 ml-4 md:ml-32">
+                <div class="mb-10 ml-6 relative">
+                    <span class="absolute -left-[146px] top-1.5 hidden md:block text-right w-28 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                        2008 - 현재
+                    </span>
+                    <span class="absolute -left-[31px] top-1 bg-primary-500 text-white rounded-full w-4 h-4 ring-8 ring-white dark:ring-darkBg flex items-center justify-center"></span>
+                    <div class="bg-white dark:bg-darkCard p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+                        <span class="inline-block md:hidden mb-2 text-xs font-semibold text-primary-500 bg-primary-50 dark:bg-primary-500/10 px-2 py-1 rounded">2008 - 현재</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Creative lecture</h3>
+                        <p class="text-slate-500 dark:text-slate-400 font-medium">AI, 자기계발, 취업 강연</p>
+                        <ul class="mt-4 space-y-2 text-slate-600 dark:text-slate-300 text-sm list-disc pl-5">
+                            <li>생성형 AI를 활용한 이미지 생성, 영상 생성 외</li>
+                            <li>기획력, 커뮤니케이션, 소통 등 직무교육</li>
+                            <li>AI 인적성 검사, AI 면접, AI를 활용한 자소서 작성 외</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-10 ml-6 relative">
+                    <span class="absolute -left-[146px] top-1.5 hidden md:block text-right w-28 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                        1988 - 현재
+                    </span>
+                    <span class="absolute -left-[31px] top-1 bg-slate-300 dark:bg-slate-700 text-white rounded-full w-4 h-4 ring-8 ring-white dark:ring-darkBg flex items-center justify-center"></span>
+                    <div class="bg-white dark:bg-darkCard p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+                        <span class="inline-block md:hidden mb-2 text-xs font-semibold text-primary-500 bg-primary-50 dark:bg-primary-500/10 px-2 py-1 rounded">1988 - 현재</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Endless learning</h3>
+                        <p class="text-slate-500 dark:text-slate-400 font-medium">인문학사 + 공학사 &amp;</p>
+                        <ul class="mt-4 space-y-2 text-slate-600 dark:text-slate-300 text-sm list-disc pl-5">
+                            <li>SMIT(서울 미디어 대학원 대학교) 미디어 비즈니스 석사 과정 중</li>
+                            <li>OCU(한국열린사이버대학교) 인공지능융합학과 졸업: 공학사 </li>
+                            <li>고려대학교 국어국문학과 졸업: 인문학사</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-10 ml-6 relative">
+                    <span class="absolute -left-[146px] top-1.5 hidden md:block text-right w-28 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                        2018 - 현재
+                    </span>
+                    <span class="absolute -left-[31px] top-1 bg-slate-300 dark:bg-slate-700 text-white rounded-full w-4 h-4 ring-8 ring-white dark:ring-darkBg flex items-center justify-center"></span>
+                    <div class="bg-white dark:bg-darkCard p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800">
+                        <span class="inline-block md:hidden mb-2 text-xs font-semibold text-primary-500 bg-primary-50 dark:bg-primary-500/10 px-2 py-1 rounded">2018 - 현재</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Book Designer</h3>
+                        <p class="text-slate-500 dark:text-slate-400 font-medium">내용부터 북디자인까지</p>
+                        <ul class="mt-4 space-y-2 text-slate-600 dark:text-slate-300 text-sm list-disc pl-5">
+                            <li>AI 관련: 플로우가 보이는 머신러닝 프로젝트, 이토록 쉬운 오렌지3 데이터 분석 with 파이썬 외 </li>
+                            <li>자기계발 관련: 시작을 시작하라(START), 기본으로(Back to the Basic) 외 </li>
+                            <li>취업 관련: 주니의 자소서 마스터클레스 (컬러판) </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 포트폴리오 갤러리 섹션 -->
+    <section id="portfolio" class="py-20 bg-slate-100 dark:bg-darkCard/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-slate-900 dark:text-white">PORTFOLIO</h2>
+                <div class="h-1 w-12 bg-primary-500 mx-auto mt-4 rounded-full"></div>
+                <p class="mt-4 text-slate-600 dark:text-slate-400 text-lg">이미지, 영상, 책 및 중요 결과물을 가치 있는 컬렉션으로 확인해 보세요.</p>
+            </div>
+            
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 카드 1: 이미지 1 -->
+                <div onclick="openPortfolioCategory(0)" class="bg-white dark:bg-darkCard rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
+                        <img src="img_01/01.png" alt="이미지1 대표" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0ea5e9/ffffff?text=Image+01'">
+                        <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="px-4 py-2 bg-white/90 text-slate-900 font-semibold text-sm rounded-lg shadow">결과물 슬라이드 보기</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-sky-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">이미지 1</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-500 transition-colors">이미지 디자인 1</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">AI 그래픽 및 시각 자료 컬렉션의 첫 번째 시리즈입니다.</p>
+                    </div>
+                </div>
+
+                <!-- 카드 2: 이미지 2 -->
+                <div onclick="openPortfolioCategory(1)" class="bg-white dark:bg-darkCard rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
+                        <img src="img_02/01.png" alt="이미지2 대표" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0284c7/ffffff?text=Image+02'">
+                        <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="px-4 py-2 bg-white/90 text-slate-900 font-semibold text-sm rounded-lg shadow">결과물 슬라이드 보기</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">이미지 2</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-500 transition-colors">이미지 디자인 2</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">창의적인 일러스트 및 상업 이미지 위주의 작품군입니다.</p>
+                    </div>
+                </div>
+
+                <!-- 카드 3: 이미지 3 -->
+                <div onclick="openPortfolioCategory(2)" class="bg-white dark:bg-darkCard rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
+                        <img src="img_03/01.png" alt="이미지3 대표" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0369a1/ffffff?text=Image+03'">
+                        <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="px-4 py-2 bg-white/90 text-slate-900 font-semibold text-sm rounded-lg shadow">결과물 슬라이드 보기</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">이미지 3</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-500 transition-colors">이미지 디자인 3</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">자연스러운 실사 및 그래픽 아트 연출 결과물 모음입니다.</p>
+                    </div>
+                </div>
+
+                <!-- 카드 4: 영상 -->
+                <div onclick="openPortfolioCategory(3)" class="bg-white dark:bg-darkCard rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
+                        <div class="w-full h-full flex items-center justify-center bg-slate-900 text-white text-4xl group-hover:scale-105 transition duration-500">
+                            <i class="fas fa-video text-slate-400"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="px-4 py-2 bg-white/90 text-slate-900 font-semibold text-sm rounded-lg shadow">영상 플레이어 열기</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">영상</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-500 transition-colors">영상 포트폴리오</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">모션 그래픽 및 AI 기반 생성 숏폼/비디오 자료들을 확인하세요.</p>
+                    </div>
+                </div>
+
+                <!-- 카드 5: 책 -->
+                <div onclick="openPortfolioCategory(4)" class="bg-white dark:bg-darkCard rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
+                        <img src="book/01.png" alt="책 대표" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/ec4899/ffffff?text=Book+Design'">
+                        <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="px-4 py-2 bg-white/90 text-slate-900 font-semibold text-sm rounded-lg shadow">북디자인 결과 보기</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-fuchsia-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">책</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-500 transition-colors">북디자인</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">기획부터 참여한 단행본 표지 및 내지 디자인 결과물입니다.</p>
+                    </div>
+                </div>
+
+                <!-- 카드 6: 기타 -->
+                <div onclick="openPortfolioCategory(5)" class="bg-white dark:bg-darkCard rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+                    <div class="relative overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800">
+                        <div class="w-full h-full flex items-center justify-center bg-slate-900 text-white text-4xl group-hover:scale-105 transition duration-500">
+                            <i class="far fa-file-pdf text-slate-400"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="px-4 py-2 bg-white/90 text-slate-900 font-semibold text-sm rounded-lg shadow">PDF 문서 뷰어 열기</span>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-slate-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">기타</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white group-hover:text-primary-500 transition-colors">기타 자료</h3>
+                        <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">통합 제안서 및 주요 기획안 PDF 포트폴리오를 제공합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 포트폴리오 인터랙티브 라이트박스 시스템 -->
+    <div id="portfolio-lightbox" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/95 hidden" role="dialog" aria-modal="true">
+        <!-- 닫기 버튼 -->
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 z-50 text-slate-400 hover:text-white bg-slate-900/50 hover:bg-slate-900 w-12 h-12 rounded-full flex items-center justify-center transition-all">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+
+        <!-- 이전 슬라이드 버튼 -->
+        <button onclick="prevAsset()" class="absolute left-4 z-40 text-slate-400 hover:text-white bg-slate-900/50 hover:bg-slate-900 w-12 h-12 rounded-full flex items-center justify-center transition-all select-none">
+            <i class="fas fa-chevron-left text-xl"></i>
+        </button>
+
+        <!-- 다음 슬라이드 버튼 -->
+        <button onclick="nextAsset()" class="absolute right-4 z-40 text-slate-400 hover:text-white bg-slate-900/50 hover:bg-slate-900 w-12 h-12 rounded-full flex items-center justify-center transition-all select-none">
+            <i class="fas fa-chevron-right text-xl"></i>
+        </button>
+
+        <!-- 본문 미디어 컨테이너 -->
+        <div class="w-full max-w-5xl h-[80vh] flex flex-col justify-center items-center relative">
+            
+            <!-- 1. 이미지 표시 영역 -->
+            <div id="lightbox-image-box" class="hidden w-full h-full flex items-center justify-center">
+                <img id="lightbox-img" src="" alt="결과물 이미지" class="max-w-full max-h-full object-contain rounded shadow-2xl transition-opacity duration-300">
+            </div>
+
+            <!-- 2. 비디오 플레이어 영역 -->
+            <div id="lightbox-video-box" class="hidden w-full h-full flex items-center justify-center">
+                <video id="lightbox-video" controls class="max-w-full max-h-full rounded shadow-2xl" src=""></video>
+            </div>
+
+            <!-- 3. PDF 뷰어 영역 -->
+            <div id="lightbox-pdf-box" class="hidden w-full h-full flex flex-col items-center justify-center gap-4">
+                <iframe id="lightbox-pdf-frame" class="w-full h-[70vh] rounded border border-slate-800 bg-white shadow-2xl" src=""></iframe>
+                <div class="flex gap-4">
+                    <a id="lightbox-pdf-download" href="" target="_blank" class="px-4 py-2 bg-primary-500 hover:bg-primary-600 text-white font-semibold text-sm rounded shadow flex items-center gap-2">
+                        <i class="fas fa-external-link-alt"></i> 새 창에서 크게 보기 및 다운로드
+                    </a>
+                </div>
+            </div>
+
+            <!-- 하단 인덱스 카운터 & 카테고리 정보 -->
+            <div class="mt-4 text-center">
+                <h4 id="lightbox-title" class="text-lg font-bold text-white tracking-wide">카테고리명</h4>
+                <p id="lightbox-counter" class="text-sm font-semibold text-slate-400 mt-1">1 / 10</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 문의 및 연락처 섹션 -->
+    <section id="contact" class="py-20 bg-white dark:bg-darkCard/30 border-t border-slate-100 dark:border-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-slate-900 dark:text-white">CONTACT ME</h2>
+                <div class="h-1 w-12 bg-primary-500 mx-auto mt-4 rounded-full"></div>
+                <p class="mt-4 text-slate-600 dark:text-slate-400 text-lg">새로운 프로젝트 기획, 외주 작업, 디자인 협업에 대해 무엇이든 말씀해주세요.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-8">
+                    <div class="space-y-2">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">함께 프로젝트를 시작해보세요</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base">보내주신 문의사항은 확인 후 영업일 기준 24시간 이내에 세밀한 안내 답변과 함께 회신해 드립니다.</p>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <span class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-500/10 text-primary-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-envelope text-lg"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white">Official Email</h4>
+                                <p class="text-slate-600 dark:text-slate-400 text-sm mt-1">writerkwack@naver.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <span class="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-500/10 text-primary-500 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-share-alt text-lg"></i>
+                            </span>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white">SNS &amp; Channels</h4>
+                                <div class="flex gap-3 mt-2 text-lg">
+                                    <a href="https://www.instagram.com/kwackrangju/" target="_blank" rel="noopener noreferrer"  class="text-slate-500 hover:text-primary-500 transition-colors" title="Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.youtube.com/@RangJuK" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-primary-500 transition-colors" title="Youtube"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-7 bg-slate-50 dark:bg-darkCard p-8 rounded-2xl border border-slate-100 dark:border-slate-800">
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="form-name" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">성함 / 기업명</label>
+                                <input type="text" id="form-name" name="from_name" required class="w-full px-4 py-3 bg-white dark:bg-darkBg border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+                            </div>
+                            <div>
+                                <label for="form-email" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">회신 이메일 주소</label>
+                                <input type="email" id="form-email" name="reply_to" required class="w-full px-4 py-3 bg-white dark:bg-darkBg border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="form-subject" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">문의 분류</label>
+                            <select id="form-subject" name="subject" required class="w-full px-4 py-3 bg-white dark:bg-darkBg border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all">
+                                <option value="신규 프로젝트 외주제작 건">신규 프로젝트 외주제작 건</option>
+                                <option value="이직 및 정규직 채용 제안">이직 및 정규직 채용 제안</option>
+                                <option value="콘텐츠 제휴 및 협업 제안">콘텐츠 제휴 및 협업 제안</option>
+                                <option value="기타 일반 문의">기타 일반 문의</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="form-message" class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">상세 문의 내용</label>
+                            <textarea id="form-message" name="message" rows="5" required class="w-full px-4 py-3 bg-white dark:bg-darkBg border border-slate-200 dark:border-slate-800 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all" placeholder="구상 중이신 일정, 대략적인 분량이나 원하시는 레퍼런스가 있다면 상세히 작성해주세요."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-primary-500 hover:bg-primary-600 text-white font-bold rounded-xl shadow-lg shadow-primary-500/10 hover:shadow-xl transition-all flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> 제안 및 문의 제출하기
+                        </button>
+                    </form>
+                    <div id="form-feedback" class="mt-4 p-4 rounded-xl hidden text-sm font-medium"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-sm">© 2026 Rang-Ju K. All rights reserved.</p>
+        <div class="flex gap-6 text-xs sm:text-sm">
+            <a href="#about" class="hover:text-white transition-colors">소개</a>
+            <a href="#experience" class="hover:text-white transition-colors">경력</a>
+            <a href="#portfolio" class="hover:text-white transition-colors">포트폴리오</a>
+            <a href="#contact" class="hover:text-white transition-colors">연락처</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // 1. 다크 모드 처리
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+    const mobileThemeIcon = document.getElementById('mobile-theme-icon');
+
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        updateThemeIcons(true);
+    } else {
+        document.documentElement.classList.remove('dark');
+        updateThemeIcons(false);
+    }
+
+    function updateThemeIcons(isDark) {
+        if (isDark) {
+            themeIcon.className = 'fas fa-sun text-lg text-yellow-400';
+            mobileThemeIcon.className = 'fas fa-sun text-lg text-yellow-400';
+        } else {
+            themeIcon.className = 'fas fa-moon text-lg';
+            mobileThemeIcon.className = 'fas fa-moon text-lg';
+        }
+    }
+
+    function toggleTheme() {
+        const isDarkNow = document.documentElement.classList.contains('dark');
+        if (isDarkNow) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            updateThemeIcons(false);
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            updateThemeIcons(true);
+        }
+    }
+    themeToggleBtn.addEventListener('click', toggleTheme);
+    mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+
+    // 2. 모바일 메뉴 제어
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
+        }
+    });
+
+    // 3. 포트폴리오 카테고리 데이터 구성 (10장식 매핑)
+    const portfolioCategories = [
+        { title: "이미지 디자인 1", folder: "img_01", type: "image", ext: "png", count: 10 },
+        { title: "이미지 디자인 2", folder: "img_02", type: "image", ext: "png", count: 10 },
+        { title: "이미지 디자인 3", folder: "img_03", type: "image", ext: "png", count: 10 },
+        { title: "영상 포트폴리오", folder: "Mov_01", type: "video", ext: "mp4", count: 10 },
+        { title: "북디자인", folder: "book", type: "image", ext: "png", count: 10 },
+        { title: "기타 자료 (PDF)", folder: "other", type: "pdf", ext: "pdf", count: 10 }
+    ];
+
+    let currentCategoryIndex = 0;
+    let currentAssetIndex = 0;
+
+    const lightbox = document.getElementById('portfolio-lightbox');
+    const lightboxImgBox = document.getElementById('lightbox-image-box');
+    const lightboxVideoBox = document.getElementById('lightbox-video-box');
+    const lightboxPdfBox = document.getElementById('lightbox-pdf-box');
+
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxVideo = document.getElementById('lightbox-video');
+    const lightboxPdfFrame = document.getElementById('lightbox-pdf-frame');
+    const lightboxPdfDownload = document.getElementById('lightbox-pdf-download');
+
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    // 포트폴리오 라이트박스 오픈
+    function openPortfolioCategory(categoryIndex) {
+        currentCategoryIndex = categoryIndex;
+        currentAssetIndex = 0; // 항상 1번째 파일부터 오픈
+        
+        renderLightboxMedia();
+        
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // 미디어 렌더링 로직
+    function renderLightboxMedia() {
+        const cat = portfolioCategories[currentCategoryIndex];
+        // 01, 02.. 형태의 파일명 변환
+        const fileNum = String(currentAssetIndex + 1).padStart(2, '0');
+        const mediaPath = `${cat.folder}/${fileNum}.${cat.ext}`;
+
+        // 뷰어박스 기본 숨김 처리
+        lightboxImgBox.classList.add('hidden');
+        lightboxVideoBox.classList.add('hidden');
+        lightboxPdfBox.classList.add('hidden');
+        
+        // 비디오 소스 및 재생 상태 정지
+        lightboxVideo.pause();
+        lightboxVideo.src = "";
+
+        if (cat.type === 'image') {
+            lightboxImgBox.classList.remove('hidden');
+            lightboxImg.style.opacity = '0';
+            lightboxImg.src = mediaPath;
+            // 로컬 파일이 없는 경우를 위한 placeholder 대체 대응
+            lightboxImg.onerror = function() {
+                this.src = `https://placehold.co/1200x800/0f172a/ffffff?text=${cat.title}+-+Asset+${fileNum}`;
+            };
+            setTimeout(() => { lightboxImg.style.opacity = '1'; }, 50);
+
+        } else if (cat.type === 'video') {
+            lightboxVideoBox.classList.remove('hidden');
+            lightboxVideo.src = mediaPath;
+            lightboxVideo.load();
+            
+        } else if (cat.type === 'pdf') {
+            lightboxPdfBox.classList.remove('hidden');
+            lightboxPdfFrame.src = mediaPath;
+            lightboxPdfDownload.href = mediaPath;
+        }
+
+        // 카운터 및 설명 업데이트
+        lightboxTitle.innerText = `${cat.title} - 작품 ${fileNum}`;
+        lightboxCounter.innerText = `${currentAssetIndex + 1} / ${cat.count}`;
+    }
+
+    // 다음 자산으로 이동
+    function nextAsset() {
+        const cat = portfolioCategories[currentCategoryIndex];
+        if (currentAssetIndex < cat.count - 1) {
+            currentAssetIndex++;
+        } else {
+            currentAssetIndex = 0; // 루프
+        }
+        renderLightboxMedia();
+    }
+
+    // 이전 자산으로 이동
+    function prevAsset() {
+        const cat = portfolioCategories[currentCategoryIndex];
+        if (currentAssetIndex > 0) {
+            currentAssetIndex--;
+        } else {
+            currentAssetIndex = cat.count - 1; // 루프
+        }
+        renderLightboxMedia();
+    }
+
+    // 라이트박스 닫기
+    function closeLightbox() {
+        lightboxVideo.pause();
+        lightboxVideo.src = "";
+        lightboxPdfFrame.src = "";
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    // 키보드 네비게이션 및 바깥 영역 클릭 대응
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('hidden')) {
+            if (e.key === 'ArrowRight') nextAsset();
+            if (e.key === 'ArrowLeft') prevAsset();
+            if (e.key === 'Escape') closeLightbox();
+        }
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    // 4. 문의 폼 전송 로직
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const feedback = document.getElementById('form-feedback');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-circle-notch animate-spin mr-2"></i> 전송 중...';
+        emailjs.sendForm('service_p4fnsur', 'template_iy2oilm', form)
+        .then(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 제안 및 문의 제출하기';
+            feedback.className = 'mt-4 p-4 rounded-xl text-sm font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:text-emerald-400 block';
+            feedback.innerHTML = '<i class="fas fa-check-circle mr-2"></i> 성공적으로 메세지가 전송되었습니다!';
+            form.reset();
+            setTimeout(() => feedback.classList.add('hidden'), 6000);
+        })
+        .catch((error) => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> 제안 및 문의 제출하기';
+            feedback.className = 'mt-4 p-4 rounded-xl text-sm font-medium bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400 block';
+            feedback.innerHTML = '<i class="fas fa-exclamation-circle mr-2"></i> 전송에 실패했습니다.';
+        });
+    }
+</script>
+</body>
+</html>
